@@ -1,5 +1,5 @@
 FROM debian:wheezy
-MAINTAINER tuxeh <sirtuxeh@gmail.com>
+MAINTAINER twoboxen <hawkins22gmail.com>
 
 # mono 3.10 currently doesn't install in debian jessie due to libpeg8 being removed.
 
@@ -11,24 +11,17 @@ RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selectio
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-RUN chown -R nobody:users /opt/NzbDrone \
-  ; mkdir -p /volumes/config/sonarr /volumes/completed /volumes/media \
-  && chown -R nobody:users /volumes
-
 EXPOSE 8989
 EXPOSE 9898
 VOLUME /volumes/config
-VOLUME /volumes/completed
 VOLUME /volumes/media
+VOLUME /volumes/torrents
 
 ADD develop/start.sh /
 RUN chmod +x /start.sh
 
 ADD develop/sonarr-update.sh /sonarr-update.sh
-RUN chmod 755 /sonarr-update.sh \
-  && chown nobody:users /sonarr-update.sh
 
-USER nobody
 WORKDIR /opt/NzbDrone
 
 ENTRYPOINT ["/start.sh"]
