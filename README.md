@@ -1,15 +1,15 @@
 # Docker Sonarr (previously NzbDrone)
 
 ### Tags
-- tuxeh/sonarr:**latest** - Installs from Sonarr master repository
-- tuxeh/sonarr:**develop** - Installs from Sonarr develop repository
+- twoboxen/sonarr:**latest** - Installs from Sonarr master repository
+- twoboxen/sonarr:**develop** - Installs from Sonarr develop repository
 
 ### Ports
 - **TCP 8989** - Web Interface
 
 ### Volumes
-- **/volumes/config** - Sonarr configuration data
-- **/volumes/completed** - Completed downloads from download client
+- **/volumes/config** - Sonarr configuration folder
+- **/volumes/blackhole** - Files to download
 - **/volumes/media** - Sonarr media folder
 
 Docker runs as uid 65534 (nobody on debian, nfsnobody on fedora). When mounting volumes from the host, ensure this uid has the correct permission on the folders.
@@ -18,12 +18,12 @@ Docker runs as uid 65534 (nobody on debian, nfsnobody on fedora). When mounting 
 
 The quickest way to get it running without integrating with a download client or media server (plex)
 ```
-sudo docker run --restart always --name sonarr -p 8989:8989 -v /path/to/your/media/folder/:/volumes/media -v /path/to/your/completed/downloads:/volumes/completed tuxeh/sonarr
+sudo docker run --restart always --name sonarr -p 8989:8989 -v /path/to/your/media/folder/:/volumes/media -v /path/to/your/download/watch/folder:/volumes/blackhole twoboxen/sonarr
 ```
 
 You can link to the download client's volumes and plex using something similar:
 ```
-sudo docker run --restart always --name sonarr --volumes-from plex --link plex:plex --volumes-from deluge --link deluge:deluge -p 8989:8989 tuxeh/sonarr
+sudo docker run --restart always --name sonarr --volumes-from plex --link plex:plex --volumes-from deluge --link deluge:deluge -p 8989:8989 twoboxen/sonarr
 ```
 
 ## Updating

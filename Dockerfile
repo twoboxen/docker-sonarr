@@ -15,7 +15,7 @@ EXPOSE 8989
 EXPOSE 9898
 VOLUME /volumes/config
 VOLUME /volumes/media
-VOLUME /volumes/torrents
+VOLUME /volumes/blackhole
 
 ADD develop/start.sh /
 RUN chmod +x /start.sh
