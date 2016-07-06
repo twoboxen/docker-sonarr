@@ -2,7 +2,6 @@
 
 ### Tags
 - twoboxen/sonarr:**latest** - Installs from Sonarr master repository
-- twoboxen/sonarr:**develop** - Installs from Sonarr develop repository
 
 ### Ports
 - **TCP 8989** - Web Interface
